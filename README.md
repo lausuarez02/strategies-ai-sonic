@@ -21,7 +21,7 @@ Key functionalities of this repo include:
 ├── 📂 notebooks/
 │ ├── strategy_backtesting.ipynb  # Tests AI strategies on past data
 ├── 📂 zk/                        # If using Noir/Aztec for ZK privacy
-│ ├── private_farming.noir        # ZK-proof logic for strategy privacy
+│ ├── private_farming.nr        # ZK-proof logic for strategy privacy
 ├── ai_agent.py                   # Main AI execution agent
 ├── README.md                     # Project documentation
 ```
