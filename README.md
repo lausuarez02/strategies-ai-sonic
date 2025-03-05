@@ -1,6 +1,6 @@
 # Cult of Ronin: AI Agent Repo (strategies-ai)
 
-This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, performing risk analysis, and utilizing ZK (Zero-Knowledge) computations for privacy. The AI agent leverages Allora Network for decentralized AI predictions and other techniques to automate and improve the decision-making process for DeFi strategies.
+This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, performing risk analysis, and utilizing ZK (Zero-Knowledge) computations for privacy. The AI agent leverages [Allora Network](https://allora.network) for decentralized AI predictions and other techniques to automate and improve the decision-making process for DeFi strategies.
 
 ## Overview
 
