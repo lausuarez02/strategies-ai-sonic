@@ -1,47 +1,38 @@
-
 # Cult of Ronin: AI Agent Repo (strategies-ai)
 
-This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, performing risk analysis, and utilizing ZK (Zero-Knowledge) computations for privacy. The AI agent leverages machine learning models and other techniques to automate and improve the decision-making process for DeFi strategies.
+This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, performing risk analysis, and utilizing ZK (Zero-Knowledge) computations for privacy. The AI agent leverages Allora Network for decentralized AI predictions and other techniques to automate and improve the decision-making process for DeFi strategies.
 
 ## Overview
 
 Key functionalities of this repo include:
-- **Dynamic strategy optimization**: AI optimizes strategy execution based on market conditions.
+- **Dynamic strategy optimization**: AI optimizes strategy execution based on market conditions using Allora Network's price predictions.
 - **Yield farming prediction**: AI-based prediction for identifying the best yield farming opportunities.
-- **Risk analysis & alerts**: Using machine learning models to assess risks such as impermanent loss, liquidation risks, and more.
+- **Risk analysis & alerts**: Using Allora's topic-based inferences to assess risks such as impermanent loss, liquidation risks, and more.
 - **ZK computations**: Implementing ZK-proof logic for privacy-sensitive strategies (e.g., Noir/Aztec).
 
 ## Folder Structure
 
 ```plaintext
 📂 strategies-ai/
-├── 📂 models/
-│ ├── yield_predictor.pkl         # Pre-trained ML model for yield farming decisions
-│ ├── risk_analyzer.pkl           # Detects farming risks, IL, liquidation risks, etc.
 ├── 📂 notebooks/
 │ ├── strategy_backtesting.ipynb  # Tests AI strategies on past data
 ├── 📂 zk/                        # If using Noir/Aztec for ZK privacy
 │ ├── private_farming.noir        # ZK-proof logic for strategy privacy
-├── ai_agent.py                   # Main AI execution agent
+├── main.py                   # Main AI execution agent using Allora Network
 ├── README.md                     # Project documentation
 ```
 
-### `models/`
-
-- **yield_predictor.pkl**: A pre-trained machine learning model that predicts the best yield farming moves based on historical data and market trends.
-- **risk_analyzer.pkl**: A machine learning model that analyzes and identifies risks related to yield farming, such as impermanent loss, liquidation risks, and more.
-
 ### `notebooks/`
 
-- **strategy_backtesting.ipynb**: A Jupyter notebook to backtest the AI strategies on historical data to evaluate performance.
+- **strategy_backtesting.ipynb**: A Jupyter notebook to backtest the AI strategies on historical data.
 
 ### `zk/`
 
-- **private_farming.noir**: ZK-proof logic to ensure privacy during strategy execution. This is where Zero-Knowledge proofs are used to hide sensitive data.
+- **private_farming.noir**: ZK-proof logic to ensure privacy during strategy execution.
 
 ### `ai_agent.py`
 
-- This is the main AI execution agent that dynamically optimizes strategy execution, interacts with the models for predictions and risk analysis, and may call Zero-Knowledge computations if privacy is needed.
+- This is the main AI execution agent that dynamically optimizes strategy execution using Allora Network's predictions and risk analysis capabilities, along with Zero-Knowledge computations for privacy when needed.
 
 ## Installation
 
@@ -55,7 +46,12 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Ensure that you have the correct environment set up for machine learning models and other dependencies. Configuration settings can be modified in `ai_agent.py` or within the models themselves.
+You'll need to set up your Allora Network API key. Create a `.env` file with:
+
+```env
+ALLORA_API_KEY=your_api_key_here
+ALLORA_CHAIN=testnet  # or mainnet for production
+```
 
 ## Usage
 
@@ -67,7 +63,7 @@ To run the AI execution agent:
 python ai_agent.py
 ```
 
-This will trigger the AI agent to start optimizing strategies, performing risk analysis, and making yield farming predictions dynamically.
+This will trigger the AI agent to start optimizing strategies using Allora Network's predictions.
 
 ### Backtesting AI Strategies
 
@@ -77,8 +73,6 @@ To backtest the strategies on historical data, run:
 jupyter notebook notebooks/strategy_backtesting.ipynb
 ```
 
-This will open a Jupyter notebook where you can test and evaluate the strategies.
-
 ### Privacy-Preserving Strategy
 
 To utilize the ZK-based private farming strategy, run:
@@ -86,8 +80,6 @@ To utilize the ZK-based private farming strategy, run:
 ```bash
 python zk/private_farming.noir
 ```
-
-This will execute the ZK-proof logic and ensure privacy during the farming strategy.
 
 ## Dependencies
 
@@ -98,10 +90,11 @@ pip install -r requirements.txt
 ```
 
 Key dependencies include:
-- `scikit-learn`: For machine learning models and predictions.
-- `pandas`: For data handling.
-- `notebook`: For running Jupyter notebooks.
-- `pycryptodome`: For Zero-Knowledge computations.
+- `allora-sdk`: For accessing Allora Network's AI predictions and insights
+- `pandas`: For data handling
+- `python-dotenv`: For environment variable management
+- `asyncio`: For asynchronous operations
+- `pycryptodome`: For Zero-Knowledge computations
 
 ## Contributing
 
