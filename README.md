@@ -1,105 +1,91 @@
 # Cult of Ronin: AI Agent Repo (strategies-ai)
 
-This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, performing risk analysis, and utilizing ZK (Zero-Knowledge) computations for privacy. The AI agent leverages [Allora Network](https://allora.network) for decentralized AI predictions and other techniques to automate and improve the decision-making process for DeFi strategies.
+This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, and performing risk analysis. The AI agent leverages [Allora Network](https://allora.network) for decentralized AI predictions to provide signals for DeFi strategies.
 
 ## Overview
 
-Key functionalities of this repo include:
-- **Dynamic strategy optimization**: AI optimizes strategy execution based on market conditions using Allora Network's price predictions.
-- **Yield farming prediction**: AI-based prediction for identifying the best yield farming opportunities.
-- **Risk analysis & alerts**: Using Allora's topic-based inferences to assess risks such as impermanent loss, liquidation risks, and more.
-- **ZK computations**: Implementing ZK-proof logic for privacy-sensitive strategies (e.g., Noir/Aztec).
+This repo serves as a prediction and signal provider:
+- **Dynamic strategy optimization**: AI optimizes strategy signals based on market conditions using Allora Network's price predictions
+- **Yield farming prediction**: AI-based prediction for identifying the best yield farming opportunities
+- **Risk analysis & alerts**: Using Allora's topic-based inferences to assess risks such as impermanent loss, liquidation risks, and more
 
-## Folder Structure
+## Setup
 
-```plaintext
-📂 strategies-ai/
-├── 📂 notebooks/
-│ ├── strategy_backtesting.ipynb  # Tests AI strategies on past data
-├── 📂 zk/                        # If using Noir/Aztec for ZK privacy
-│ ├── private_farming.noir        # ZK-proof logic for strategy privacy
-├── main.py                   # Main AI execution agent using Allora Network
-├── README.md                     # Project documentation
-```
-
-### `notebooks/`
-
-- **strategy_backtesting.ipynb**: A Jupyter notebook to backtest the AI strategies on historical data.
-
-### `zk/`
-
-- **private_farming.noir**: ZK-proof logic to ensure privacy during strategy execution.
-
-### `ai_agent.py`
-
-- This is the main AI execution agent that dynamically optimizes strategy execution using Allora Network's predictions and risk analysis capabilities, along with Zero-Knowledge computations for privacy when needed.
-
-## Installation
-
-Clone this repository and install dependencies using the following commands:
-
+1. Install dependencies:
 ```bash
-git clone https://github.com/lausuarez02/strategies-ai-sonic.git
-cd strategies-ai-sonic
 pip install -r requirements.txt
 ```
 
-## Configuration
-
-You'll need to set up your Allora Network API key. Create a `.env` file with:
-
+2. Create a `.env` file with your configuration:
 ```env
 ALLORA_API_KEY=your_api_key_here
-ALLORA_CHAIN=testnet  # or mainnet for production
+ALLORA_CHAIN=testnet
+API_PORT=8000
 ```
 
-## Usage
+3. Start the API server:
+```bash
+uvicorn main:app --reload
+```
 
-### Running the AI Agent
+## API Endpoints
 
-To run the AI execution agent:
+- `GET /`: Health check and service info
+- `GET /health`: Detailed health status of Allora connection
+- `POST /strategy/signals`: Get strategy signals including:
+  - Yield predictions for BTC and ETH
+  - Risk analysis
+  - Trading signals
+
+## Example Usage
 
 ```bash
-python ai_agent.py
+# Get strategy signals
+curl -X POST http://localhost:8000/strategy/signals
+
+# Check service health
+curl http://localhost:8000/health
 ```
 
-This will trigger the AI agent to start optimizing strategies using Allora Network's predictions.
+## Response Format
 
-### Backtesting AI Strategies
-
-To backtest the strategies on historical data, run:
-
-```bash
-jupyter notebook notebooks/strategy_backtesting.ipynb
+Strategy signals response example:
+```json
+{
+    "timestamp": "2024-03-20T00:00:00Z",
+    "yield_data": {
+        "btc_prediction": {
+            "price": "...",
+            "normalized": "...",
+            "confidence": "..."
+        },
+        "eth_prediction": {
+            "price": "...",
+            "normalized": "...",
+            "confidence": "..."
+        },
+        "yield_score": 0.75
+    },
+    "risk_data": {
+        "risk_factors": [],
+        "risk_score": 0.3
+    },
+    "signals": {
+        "high_yield": true,
+        "low_risk": true
+    }
+}
 ```
 
-### Privacy-Preserving Strategy
+## Architecture
 
-To utilize the ZK-based private farming strategy, run:
+This service acts as a prediction provider that:
+1. Connects to Allora Network for AI predictions
+2. Processes and normalizes prediction data
+3. Calculates risk scores
+4. Provides clean signals via API endpoints
+5. Can be consumed by other services for strategy execution
 
-```bash
-python zk/private_farming.noir
-```
+## Note
 
-## Dependencies
-
-Make sure to install all required libraries:
-
-```bash
-pip install -r requirements.txt
-```
-
-Key dependencies include:
-- `allora-sdk`: For accessing Allora Network's AI predictions and insights
-- `pandas`: For data handling
-- `python-dotenv`: For environment variable management
-- `asyncio`: For asynchronous operations
-- `pycryptodome`: For Zero-Knowledge computations
-
-## Contributing
-
-Feel free to fork this repository and submit pull requests. If you find a bug or want to suggest a feature, open an issue, and I'll review it.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This repository only handles predictions and signals. For actual strategy execution and trading, please refer to the strategy execution repository.
