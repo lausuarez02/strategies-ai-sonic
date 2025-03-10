@@ -1,4 +1,4 @@
-# Cult of Ronin: AI Agent Repo (strategies-ai)
+# Shogun: AI Agent Repo (strategies-ai)
 
 This repository is responsible for optimizing strategy execution dynamically using AI, predicting the best yield farming moves, and performing risk analysis. The AI agent leverages [Allora Network](https://allora.network) for decentralized AI predictions to provide signals for DeFi strategies.
 
